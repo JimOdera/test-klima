@@ -50,19 +50,19 @@ const page = () => {
 
                             <div className="flex flex-col gap-4 group/list">
 
-                                {/* Institution — active by default, deactivates when siblings are hovered */}
+                                {/* Institution */}
                                 <button className='
-                                    flex justify-between items-center gap-2 px-4 py-6
+                                    group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-[#082D2A] bg-[#ECFFF5] rounded-xl text-[#082D2A]
                                     transition-all duration-300
                                     group-hover/list:border-gray-300 group-hover/list:bg-white group-hover/list:text-gray-700
                                     hover:!border-[#082D2A] hover:!bg-[#ECFFF5] hover:!text-[#082D2A] cursor-pointer
                                 '>
                                     <div className='flex items-center gap-2'>
-                                        <Landmark size={28} className="text-[#082D2A] group-hover/list:text-[#0FE880] hover:!text-[#082D2A] transition-colors duration-300" />
-                                        <p className='font-semibold group-hover/list:font-normal group-hover/btn:!font-semibold'>Institution</p>
+                                        <Landmark size={28} className="text-[#082D2A] group-hover/list:text-[#0FE880] group-hover/btn:!text-[#082D2A] transition-colors duration-300" />
+                                        <p className='group-hover/list:font-normal group-hover/btn:!font-semibold font-semibold'>Institution</p>
                                     </div>
-                                    <ArrowRight className='group-hover/list:opacity-0 group-hover/btn:!opacity-100 transition-opacity duration-300' />
+                                    <ArrowRight className='opacity-100 group-hover/list:opacity-0 group-hover/btn:!opacity-100 transition-opacity duration-300' />
                                 </button>
 
                                 {/* Carbon Expert */}

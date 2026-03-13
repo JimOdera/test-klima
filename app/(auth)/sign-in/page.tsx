@@ -18,7 +18,7 @@ const FormInput = ({
     onChange: (v: string) => void
     placeholder?: string
 }) => (
-    <div className="relative w-full border border-gray-200 bg-white rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] focus:bg-[#F9F9F9] transition-colors duration-200">
+    <div className="relative w-full border border-gray-300 bg-[#F9F9F9] rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] focus:bg-white transition-colors duration-200">
         <label className="absolute top-2 left-4 text-[11px] text-[#6B7280] font-medium pointer-events-none">
             {label}
         </label>
@@ -45,7 +45,7 @@ const FormPasswordInput = ({
     const hasValue = value.length > 0
 
     return (
-        <div className="relative w-full border border-gray-200 rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] bg-white focus:bg-[#F9F9F9] transition-colors duration-200">
+        <div className="relative w-full border border-gray-300 rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] bg-[#F9F9F9] focus:bg-white transition-colors duration-200">
             <label className="absolute top-2 left-4 text-[11px] text-[#6B7280] font-medium pointer-events-none">
                 {label}
             </label>
@@ -114,7 +114,7 @@ const SignIn = () => {
                                 <Image src={white_logo} alt='Klimawhitelogo' />
                             </div>
                             <h1 className='text-white text-6xl'>
-                                Welcome to an Innovative Carbon Marketplace
+                                Welcome to an <span className='font-semibold'>Innovative</span> <span className='font-semibold'>Carbon</span> <span className='font-semibold'>Marketplace</span>
                             </h1>
                         </div>
                     </div>
