@@ -43,8 +43,8 @@ const MultiSelectButtons: React.FC<MultiSelectButtonsProps> = ({
                         type="button"
                         onClick={() => toggleOption(option)}
                         className={`px-4 py-2 rounded-lg border text-left text-xs transition ${selectedValues.includes(option)
-                            ? "bg-green-100 border-green-500 text-green-800"
-                            : "border-gray-300 hover:bg-gray-50"
+                            ? "bg-[#E3FCEF] border-[#0D453B] text-[#0D453B]"
+                            : "border-gray-300 hover:bg-gray-50 bg-white"
                             }`}
                     >
                         {option}
