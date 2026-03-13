@@ -32,7 +32,7 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
             <textarea
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
-                className={`w-full ${heightClass} text-xs border border-gray-300 rounded-lg p-3 resize-none focus:outline-none focus:border-gray-400 transition`}
+                className={`w-full ${heightClass} text-xs border border-gray-300 rounded-lg p-3 resize-none focus:outline-none focus:border-gray-400 transition bg-white`}
                 placeholder={placeholder}
             />
         </div>

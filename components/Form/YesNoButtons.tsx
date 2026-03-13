@@ -27,7 +27,7 @@ const YesNoButtons: React.FC<YesNoButtonsProps> = ({
                 <button
                     type="button"
                     onClick={() => onChange(value === true ? null : true)}
-                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition ${value === true
+                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition bg-white ${value === true
                         ? "bg-green-100 border-green-500 text-green-800"
                         : "border-gray-300 hover:bg-gray-50 text-gray-600"
                         }`}
@@ -37,7 +37,7 @@ const YesNoButtons: React.FC<YesNoButtonsProps> = ({
                 <button
                     type="button"
                     onClick={() => onChange(value === false ? null : false)}
-                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition ${value === false
+                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition bg-white ${value === false
                         ? "bg-red-100 border-red-500 text-red-800"
                         : "border-gray-300 hover:bg-gray-50 text-gray-600"
                         }`}

@@ -11,6 +11,7 @@ import {
     Handshake,
     Plus,
     Trash2,
+    CircleArrowRight,
 } from "lucide-react";
 import {
     FormTextarea,
@@ -21,7 +22,6 @@ import {
     FileUpload,
     MultiSelectButtons,
     FormSection,
-    SubmitButton,
 } from "@/components/Form/Index";
 
 interface ContactPerson {
@@ -245,7 +245,7 @@ const Institution = () => {
     return (
         <div className="space-y-6">
             {/* Page heading */}
-            <div className="space-y-2">
+            {/* <div className="shrink-0 space-y-2 sticky top-0 w-full bg-white z-40">
                 <h4 className="font-medium text-[#1ECEC9] text-sm">For Institutions</h4>
                 <h1 className="text-[#044D5E] text-lg md:text-xl font-semibold">
                     Track Your Green Finance Deployment
@@ -255,13 +255,13 @@ const Institution = () => {
                     Access comprehensive tracking tools, generate impact reports, and demonstrate your commitment to
                     sustainable development goals while connecting with verified green projects.
                 </p>
-            </div>
+            </div> */}
 
             {/* Sidebar + Form */}
-            <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-start">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-18 lg:gap-32 items-start">
 
                 {/* Sticky sidebar — hidden on mobile, visible md+ */}
-                <aside className="hidden md:flex flex-col gap-2 sticky top-20 self-start shrink-0 w-64 lg:w-72 xl:w-80 bg-gradient-to-br from-[#BFEFF8]/30 to-[#B1CA69]/30 p-4 rounded-2xl">
+                <aside className="hidden md:flex flex-col gap-2 sticky top-0 self-start shrink-0 w-64 lg:w-72 xl:w-80 bg-gradient-to-br from-[#BFEFF8]/30 to-[#B1CA69]/30 p-4 rounded-2xl">
                     <h1 className="text-sm font-semibold text-gray-700 mb-2">Content</h1>
                     <div className="flex flex-col">
                         {[
@@ -276,7 +276,7 @@ const Institution = () => {
                             <div key={name} className="flex gap-3">
                                 <div className="flex flex-col items-center">
                                     <span className={`w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full border-2 transition-colors duration-300
-                                        ${activeSection === name
+                                    ${activeSection === name
                                             ? "bg-[#0B2E34] border-[#0B2E34] text-white"
                                             : "bg-white border-gray-200 text-[#0B2E34]"
                                         }`}>
@@ -286,7 +286,6 @@ const Institution = () => {
                                         <div className="w-px flex-1 min-h-[24px] bg-[#0B2E34]" />
                                     )}
                                 </div>
-
                                 <div
                                     onClick={() => handleNavClick(name)}
                                     className={`flex items-center cursor-pointer h-10 ${index < arr.length - 1 ? subtitle ? "mb-10" : "mb-6" : ""}`}
@@ -306,7 +305,7 @@ const Institution = () => {
                 </aside>
 
                 {/* Mobile section tabs — visible only on mobile */}
-                <div className="flex md:hidden gap-2 overflow-x-auto pb-2 w-full scrollbar-hide">
+                <div className="flex md:hidden shrink-0 gap-2 overflow-x-auto pb-2 w-full scrollbar-hide">
                     {[
                         { name: "Institution Information", icon: Building2 },
                         { name: "Investment Objectives", icon: Target },
@@ -321,7 +320,7 @@ const Institution = () => {
                             type="button"
                             onClick={() => handleNavClick(name)}
                             className={`flex items-center gap-1.5 shrink-0 px-3 py-2 rounded-full text-[11px] font-medium border transition-colors duration-200
-                                ${activeSection === name
+                            ${activeSection === name
                                     ? "bg-[#0B2E34] text-white border-[#0B2E34]"
                                     : "bg-white text-gray-600 border-gray-200 hover:border-[#0B2E34]"
                                 }`}
@@ -333,11 +332,13 @@ const Institution = () => {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex-1 min-w-0 space-y-6">
+                <form onSubmit={handleSubmit} className="flex-1 min-w-0 overflow-y-auto space-y-6 pb-8">
                     <FormSection
                         title="Institution Information"
                         dataSection="Institution Information"
                         sectionRef={institutionInfoRef}
+                        step={1}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <FormTextarea
                             label="What is your institutional approach to green finance and sustainability?"
@@ -373,7 +374,7 @@ const Institution = () => {
                                     Add Another
                                 </button>
                             </div>
-                            <div className="space-y-4">
+                            <div className="space-y-4 bg-white rounded-lg">
                                 {relationshipManagers.map((rm, index) => (
                                     <div key={rm.id} className="border border-gray-200 rounded-lg p-4 space-y-3">
                                         <div className="flex items-center justify-between mb-2">
@@ -395,14 +396,14 @@ const Institution = () => {
                                                 type="text"
                                                 value={rm.firstName}
                                                 onChange={(e) => updateRelationshipManager(rm.id, 'firstName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="First Name"
                                             />
                                             <input
                                                 type="text"
                                                 value={rm.lastName}
                                                 onChange={(e) => updateRelationshipManager(rm.id, 'lastName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="Last Name"
                                             />
                                         </div>
@@ -410,7 +411,7 @@ const Institution = () => {
                                             type="email"
                                             value={rm.email}
                                             onChange={(e) => updateRelationshipManager(rm.id, 'email', e.target.value)}
-                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                             placeholder="Email"
                                         />
                                         <FormDropdown
@@ -440,7 +441,7 @@ const Institution = () => {
                                     Add Another
                                 </button>
                             </div>
-                            <div className="space-y-4">
+                            <div className="space-y-4 bg-white rounded-lg">
                                 {keyHolders.map((kh, index) => (
                                     <div key={kh.id} className="border border-gray-200 rounded-lg p-4 space-y-3">
                                         <div className="flex items-center justify-between mb-2">
@@ -462,14 +463,14 @@ const Institution = () => {
                                                 type="text"
                                                 value={kh.firstName}
                                                 onChange={(e) => updateKeyHolder(kh.id, 'firstName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="First Name"
                                             />
                                             <input
                                                 type="text"
                                                 value={kh.lastName}
                                                 onChange={(e) => updateKeyHolder(kh.id, 'lastName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="Last Name"
                                             />
                                         </div>
@@ -477,7 +478,7 @@ const Institution = () => {
                                             type="email"
                                             value={kh.email}
                                             onChange={(e) => updateKeyHolder(kh.id, 'email', e.target.value)}
-                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition"
+                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
                                             placeholder="Email"
                                         />
                                         <FormDropdown
@@ -497,6 +498,8 @@ const Institution = () => {
                         title="Investment Objectives"
                         dataSection="Investment Objectives"
                         sectionRef={investmentObjectivesRef}
+                        step={2}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <FormDropdown
                             label="What are your specific objectives in seeking green finance opportunities?"
@@ -518,6 +521,8 @@ const Institution = () => {
                         title="Risk Appetite"
                         dataSection="Risk Appetite"
                         sectionRef={riskAppetiteRef}
+                        step={3}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <RiskToleranceButtons
                             label="What is your risk tolerance when it comes to green investments?"
@@ -536,6 +541,8 @@ const Institution = () => {
                         title="Performance Metrics"
                         dataSection="Performance Metrics"
                         sectionRef={performanceMetricsRef}
+                        step={4}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <YesNoButtons
                             label="Do you currently measure the performance of your green portfolio?"
@@ -566,6 +573,8 @@ const Institution = () => {
                         title="Stakeholder Engagement"
                         dataSection="Stakeholder Engagement"
                         sectionRef={stakeholderEngagementRef}
+                        step={5}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <FormDropdown
                             label="Who are the key stakeholders within your organization involved in green finance decisions?"
@@ -588,6 +597,8 @@ const Institution = () => {
                         title="Regulatory Compliance"
                         dataSection="Regulatory Compliance"
                         sectionRef={regulatoryComplianceRef}
+                        step={6}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <YesNoButtons
                             label="Are there regulatory or compliance requirements that need to be considered in your green investment strategy?"
@@ -618,6 +629,8 @@ const Institution = () => {
                         title="Partnership Opportunities"
                         dataSection="Partnership Opportunities"
                         sectionRef={partnershipOpportunitiesRef}
+                        step={7}
+                        description="Klima Harvest will support you in tracking your green finance commitments against environment, social and economic performance indicators, while connecting you to carbon revenue generating opportunities across your portfolio."
                     >
                         <YesNoButtons
                             label="Are you open to partnership opportunities to enhance your green investment strategy?"
@@ -636,7 +649,10 @@ const Institution = () => {
                         )}
                     </FormSection>
 
-                    <SubmitButton text="Submit" />
+                    <div className="flex items-center justify-between">
+                        <button className="rounded-full bg-white px-5 py-2 border border-black text-xs text-black font-medium">Save as Draft</button>
+                        <button className="flex items-center gap-2 rounded-full bg-[#044D5E] px-5 py-2 border border-[#044D5E] text-xs text-white font-medium">Save <CircleArrowRight size={16} strokeWidth={1.75} /></button>
+                    </div>
                 </form>
             </div>
         </div>

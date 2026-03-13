@@ -45,7 +45,7 @@ const RiskToleranceButtons: React.FC<RiskToleranceButtonsProps> = ({
                         key={level}
                         type="button"
                         onClick={() => onChange(value === level ? null : level)}
-                        className={`px-4 py-2 rounded-lg border text-xs font-medium capitalize transition ${getButtonStyles(
+                        className={`px-4 py-2 rounded-lg border text-xs font-medium capitalize transition bg-white ${getButtonStyles(
                             level
                         )}`}
                     >

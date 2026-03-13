@@ -42,7 +42,7 @@ const FormDropdown: React.FC<FormDropdownProps> = ({
 
             <div
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-full text-xs rounded-lg px-4 py-2 flex justify-between items-center cursor-pointer transition-all duration-200 ${isOpen ? "border border-gray-400 bg-white shadow-sm" : "border border-gray-300 hover:bg-gray-50"
+                className={`w-full text-xs rounded-lg px-4 py-2 flex justify-between bg-white items-center cursor-pointer transition-all duration-200 ${isOpen ? "border border-gray-400 bg-white shadow-sm" : "border border-gray-300 hover:bg-gray-50"
                     }`}
             >
                 <span className={isPlaceholder ? "text-gray-500" : "text-gray-800"}>{displayValue}</span>

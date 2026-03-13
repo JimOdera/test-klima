@@ -31,7 +31,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 {label}
                 {required && <span className="text-red-500 ml-1">*</span>}
             </label>
-            <label className="flex flex-col items-center justify-center w-full h-24 border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 focus:outline-none focus:border-gray-400 transition">
+            <label className="flex flex-col items-center justify-center w-full h-24 bg-white border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 focus:outline-none focus:border-gray-400 transition">
                 <div className="flex flex-col items-center">
                     <UploadCloud className="w-6 h-6 text-gray-500 mb-2" />
                     <span className="text-xs text-gray-500">{helperText}</span>
