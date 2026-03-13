@@ -29,11 +29,11 @@ const FormSection: React.FC<FormSectionProps> = ({
                     </span>
                 )}
 
-                <h1 className="text-lg font-medium text-gray-600 mb-2">{title}</h1>
+                <h1 className="text-lg font-medium text-[#000000] mb-2">{title}</h1>
 
                 {/* Description */}
                 {description && (
-                    <p className="text-xs text-gray-400 leading-relaxed mb-6 w-full max-w-xl">{description}</p>
+                    <p className="text-xs text-[#1C1C1C] leading-relaxed mb-6 w-full max-w-xl">{description}</p>
                 )}
 
                 <div className="space-y-6">{children}</div>

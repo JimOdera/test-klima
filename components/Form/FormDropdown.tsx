@@ -35,7 +35,7 @@ const FormDropdown: React.FC<FormDropdownProps> = ({
 
     return (
         <div className={`relative ${className}`}>
-            <label className="text-xs text-gray-700 font-medium block">
+            <label className="text-xs text-gray-700 font-medium block mb-2">
                 {label}
                 {required && <span className="text-red-500 ml-1">*</span>}
             </label>
