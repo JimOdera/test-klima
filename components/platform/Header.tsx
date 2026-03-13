@@ -98,7 +98,7 @@ function NavLink({
             />
             <span>{label}</span>
             {badge && (
-                <span className="ml-0.5 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-100 text-teal-700 leading-none">
+                <span className="ml-0.5 px-2 py-1 rounded-full text-[11px] font-semibold bg-gradient-to-br from-[#BFEFF8] to-[#B1CA69] text-black leading-none">
                     {badge}
                 </span>
             )}

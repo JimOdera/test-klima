@@ -1,9 +1,15 @@
+'use client'
+
 import { main_logo } from '@/public'
 import Image from 'next/image'
 import React from 'react'
 import { ArrowRight, CircleUser, Landmark, Leaf, Sprout, Telescope } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 const page = () => {
+
+    const router = useRouter()
+
     return (
         <div>
             <div className="flex w-full h-[100vh] bg-rosde-100">
@@ -51,7 +57,7 @@ const page = () => {
                             <div className="flex flex-col gap-4 group/list">
 
                                 {/* Institution */}
-                                <button className='
+                                <button onClick={() => router.push('/platform/Institution')} className='
                                     group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-[#082D2A] bg-[#ECFFF5] rounded-xl text-[#082D2A]
                                     transition-all duration-300
@@ -66,7 +72,7 @@ const page = () => {
                                 </button>
 
                                 {/* Carbon Expert */}
-                                <button className='
+                                <button onClick={() => router.push('/platform/CarbonExpert')} className='
                                     group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-gray-300 rounded-xl
                                     hover:border-[#082D2A] hover:bg-[#ECFFF5] hover:text-[#082D2A]
@@ -80,7 +86,7 @@ const page = () => {
                                 </button>
 
                                 {/* Individual Investor */}
-                                <button className='
+                                <button onClick={() => router.push('/platform/IndividualInvestor')} className='
                                     group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-gray-300 rounded-xl
                                     hover:border-[#082D2A] hover:bg-[#ECFFF5] hover:text-[#082D2A]
@@ -94,7 +100,7 @@ const page = () => {
                                 </button>
 
                                 {/* Carbon Harvester */}
-                                <button className='
+                                <button onClick={() => router.push('/platform/CarbonHarvester')} className='
                                     group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-gray-300 rounded-xl
                                     hover:border-[#082D2A] hover:bg-[#ECFFF5] hover:text-[#082D2A]
@@ -108,7 +114,7 @@ const page = () => {
                                 </button>
 
                                 {/* Aspirational Harvester */}
-                                <button className='
+                                <button onClick={() => router.push('/platform/AspirationalHarvester')} className='
                                     group/btn flex justify-between items-center gap-2 px-4 py-6
                                     border border-gray-300 rounded-xl
                                     hover:border-[#082D2A] hover:bg-[#ECFFF5] hover:text-[#082D2A]
