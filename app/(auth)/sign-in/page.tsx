@@ -18,7 +18,7 @@ const FormInput = ({
     onChange: (v: string) => void
     placeholder?: string
 }) => (
-    <div className="relative w-full border border-[#D2D2D2] rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#3D7A5E] transition-colors duration-200">
+    <div className="relative w-full border border-gray-200 bg-white rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] focus:bg-[#F9F9F9] transition-colors duration-200">
         <label className="absolute top-2 left-4 text-[11px] text-[#6B7280] font-medium pointer-events-none">
             {label}
         </label>
@@ -45,7 +45,7 @@ const FormPasswordInput = ({
     const hasValue = value.length > 0
 
     return (
-        <div className="relative w-full border border-[#D2D2D2] rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#3D7A5E] transition-colors duration-200">
+        <div className="relative w-full border border-gray-200 rounded-2xl px-4 pt-5 pb-3 focus-within:border-[#172B4D] bg-white focus:bg-[#F9F9F9] transition-colors duration-200">
             <label className="absolute top-2 left-4 text-[11px] text-[#6B7280] font-medium pointer-events-none">
                 {label}
             </label>
@@ -79,7 +79,8 @@ const FormPasswordInput = ({
 const SubmitButton = ({ label }: { label: string }) => (
     <button
         type="submit"
-        className="w-full h-[58px] rounded-full bg-gradient-to-br from-[#BFEFF8]/40 to-[#B1CA69]/40 flex items-center justify-center gap-2 text-[17px] font-semibold text-[#044D5E] transition-opacity hover:opacity-90 active:opacity-80">
+        className="w-full h-[58px] rounded-full bg-gradient-to-br from-[#BFEFF8]/40 to-[#B1CA69]/40 flex items-center justify-center gap-2 text-[17px]
+        font-semibold text-[#044D5E] transition-opacity hover:opacity-90 active:opacity-80 cursor-pointer">
         {label}
         <CircleArrowRight size={24} strokeWidth={1.5} className="text-[#404040]" />
     </button>
@@ -123,26 +124,26 @@ const SignIn = () => {
                             <h1 className='text-[48px] font-semibold text-gray-800'>Login to <br /> your account</h1>
 
                             <div className='flex items-center gap-2 justify-between'>
-                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full'>
+                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full cursor-pointer'>
                                     <Image src={facebook} alt='fb' />
                                 </span>
-                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full'>
+                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full cursor-pointer'>
                                     <Image src={google} alt='google' />
                                 </span>
-                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full'>
+                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full cursor-pointer'>
                                     <Image src={apple} alt='ios' />
                                 </span>
-                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full'>
+                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full cursor-pointer'>
                                     <Image src={windows} alt='ms' />
                                 </span>
-                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full'>
+                                <span className='flex items-center justify-center border border-[#D2D2D2] w-[78.6px] h-[48px] rounded-full cursor-pointer'>
                                     <Image src={phone} alt='ph' />
                                 </span>
                             </div>
 
                             <div className='flex items-center gap-3'>
                                 <hr className='flex-1 border border-black' />
-                                <span className='text-xs text-black'>OR</span>
+                                <span className='text-xs text-black font-semibold'>OR</span>
                                 <hr className='flex-1 border border-black' />
                             </div>
 
@@ -185,7 +186,8 @@ const SignIn = () => {
                                         </span>
                                         <button
                                             type="button"
-                                            className="w-full border border-[#D2D2D2] rounded-full px-5 py-2.5 text-[14px] font-semibold text-gray-900 hover:bg-gray-50 transition-colors"
+                                            className="w-full border border-[#D2D2D2] rounded-full px-5 py-2.5 text-[14px] font-semibold 
+                                            text-gray-900 hover:bg-gray-50 transition-colors cursor-pointer"
                                         >
                                             Register now
                                         </button>
