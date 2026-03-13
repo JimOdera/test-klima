@@ -332,7 +332,7 @@ const Institution = () => {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex-1 min-w-0 overflow-y-auto space-y-6 pb-8">
+                <form onSubmit={handleSubmit} className="flex-1 min-w-0 w-full max-w-2xl overflow-y-auto space-y-6 pb-8">
                     <FormSection
                         title="Institution Information"
                         dataSection="Institution Information"
