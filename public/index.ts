@@ -116,7 +116,7 @@ import messagecirclemore from "@/public/assets/images/icons/message-circle-more.
 import landmark from "@/public/assets/images/icons/landmark.svg";
 
 
-import upField from "@/public/assets/images/upfield.svg";
+import upField from "@/public/assets/images/upfield.png";
 import search from "@/public/assets/images/search.svg";
 
 import imageUpload from "@/public/assets/images/icons/imageUpload.svg";
