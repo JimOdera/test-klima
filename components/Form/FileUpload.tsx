@@ -1,7 +1,8 @@
 // FileUpload.tsx
 
 import React from "react";
-import { UploadCloud } from "lucide-react";
+import Image from "next/image";
+import { imageUpload } from "@/public";
 
 interface FileUploadProps {
     label: string;
@@ -18,7 +19,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
     accept = ".pdf,.doc,.docx",
     required = false,
     className = "",
-    helperText = "Click to upload (PDF, DOC, DOCX)",
+    // helperText = "",
+    // helperText = "Click to upload (PDF, DOC, DOCX)",
 }) => {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
@@ -31,10 +33,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 {label}
                 {required && <span className="text-red-500 ml-1">*</span>}
             </label>
-            <label className="flex flex-col items-center justify-center w-full h-24 bg-white border border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 focus:outline-none focus:border-gray-400 transition">
+            <label
+                className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition"
+                style={{ borderSpacing: '8px', strokeDasharray: '8 4' }}
+            >
                 <div className="flex flex-col items-center">
-                    <UploadCloud className="w-6 h-6 text-gray-500 mb-2" />
-                    <span className="text-xs text-gray-500">{helperText}</span>
+                    <Image src={imageUpload} alt="imageUpload" />
+                    <p className="text-center text-xs"><span className="font-bold">Upload File(s)</span> <br />Drag and drop files here</p>
+                    {/* <span className="text-xs text-gray-500">{helperText}</span> */}
                 </div>
                 <input
                     type="file"

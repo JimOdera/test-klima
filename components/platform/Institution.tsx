@@ -262,7 +262,7 @@ const Institution = () => {
 
                 {/* Sticky sidebar — hidden on mobile, visible md+ */}
                 <aside className="hidden md:flex flex-col gap-2 sticky top-0 self-start shrink-0 w-64 lg:w-72 xl:w-80 bg-gradient-to-br from-[#BFEFF8]/30 to-[#B1CA69]/30 p-4 rounded-2xl">
-                    <h1 className="text-sm font-semibold text-gray-700 mb-2">Content</h1>
+                    <h1 className="text-sm font-semibold text-gray-700 mb-2">Lets onboard you as an<br /> Instittion</h1>
                     <div className="flex flex-col">
                         {[
                             { name: "Institution Information", icon: Building2, subtitle: "Add your institution details to get better visibility" },
@@ -283,7 +283,7 @@ const Institution = () => {
                                         <Icon size={16} />
                                     </span>
                                     {index < arr.length - 1 && (
-                                        <div className="w-px flex-1 min-h-[24px] bg-[#0B2E34]" />
+                                        <div className="w-[2px] flex-1 min-h-[24px] bg-white" />
                                     )}
                                 </div>
                                 <div
@@ -332,7 +332,7 @@ const Institution = () => {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex-1 min-w-0 w-full max-w-2xl overflow-y-auto space-y-6 pb-8">
+                <form onSubmit={handleSubmit} className="flex-1 min-w-0 w-full max-w-2xl overflow-y-auto space-y-12 pb-8">
                     <FormSection
                         title="Institution Information"
                         dataSection="Institution Information"
@@ -351,14 +351,14 @@ const Institution = () => {
                         <FileUpload
                             label="Upload Green Finance Strategy/Sustainability Strategy*"
                             accept=".pdf,.doc,.docx"
-                            helperText="Upload your strategy document (PDF, DOC)"
+                            // helperText="Upload your strategy document (PDF, DOC)"
                             required
                         />
 
                         <FileUpload
                             label="Upload branding materials**"
                             accept=".pdf,.png,.jpg,.jpeg"
-                            helperText="Upload branding materials (PDF, PNG, JPG)"
+                        // helperText="Upload branding materials (PDF, PNG, JPG)"
                         />
 
                         {/* Relationship Managers */}
@@ -396,14 +396,14 @@ const Institution = () => {
                                                 type="text"
                                                 value={rm.firstName}
                                                 onChange={(e) => updateRelationshipManager(rm.id, 'firstName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="First Name"
                                             />
                                             <input
                                                 type="text"
                                                 value={rm.lastName}
                                                 onChange={(e) => updateRelationshipManager(rm.id, 'lastName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="Last Name"
                                             />
                                         </div>
@@ -411,7 +411,7 @@ const Institution = () => {
                                             type="email"
                                             value={rm.email}
                                             onChange={(e) => updateRelationshipManager(rm.id, 'email', e.target.value)}
-                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                            className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                             placeholder="Email"
                                         />
                                         <FormDropdown
@@ -463,14 +463,14 @@ const Institution = () => {
                                                 type="text"
                                                 value={kh.firstName}
                                                 onChange={(e) => updateKeyHolder(kh.id, 'firstName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="First Name"
                                             />
                                             <input
                                                 type="text"
                                                 value={kh.lastName}
                                                 onChange={(e) => updateKeyHolder(kh.id, 'lastName', e.target.value)}
-                                                className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                                className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                                 placeholder="Last Name"
                                             />
                                         </div>
@@ -478,7 +478,7 @@ const Institution = () => {
                                             type="email"
                                             value={kh.email}
                                             onChange={(e) => updateKeyHolder(kh.id, 'email', e.target.value)}
-                                            className="w-full text-xs border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-400 transition bg-white"
+                                            className="w-full text-xs border border-gray-300 rounded-lg px-4 py-4 focus:outline-none focus:border-gray-400 transition bg-white"
                                             placeholder="Email"
                                         />
                                         <FormDropdown

@@ -21,7 +21,7 @@ const FormTextarea: React.FC<FormTextareaProps> = ({
     rows = 6,
     className = "",
 }) => {
-    const heightClass = rows === 6 ? "h-24" : rows === 7 ? "h-28" : "h-32";
+    const heightClass = rows === 6 ? "h-32" : rows === 7 ? "h-28" : "h-32";
 
     return (
         <div className={className}>

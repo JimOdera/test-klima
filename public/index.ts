@@ -119,6 +119,8 @@ import landmark from "@/public/assets/images/icons/landmark.svg";
 import upField from "@/public/assets/images/upfield.svg";
 import search from "@/public/assets/images/search.svg";
 
+import imageUpload from "@/public/assets/images/icons/imageUpload.svg";
+
 
 // social
 import facebook from "@/public/assets/images/social/facebook.svg";
@@ -136,4 +138,4 @@ export { klimaLogo, forest1, forest2, forest3, forest4, forest5, forest6, forest
     aside1, aside2, aside3, aside4, aside5, aside6, acticon3, acticon4, acticon5, acticon6, acticon7, acticon8, acticon9, acticon10, acticon11,
     acticon12, acticon13, white_logo, KlimaLogoWhite, projects, activitiesIcon, dashboardIcon, coordinates, reports, upField, search,
     badgecheckfilled, badgePlus, fileText, rss, messagecirclemore, landmark, badgecheckfilledWhite, windmill, facebook, windows, google, apple, phone,
-    main_logo, profile };
+    main_logo, profile, imageUpload };

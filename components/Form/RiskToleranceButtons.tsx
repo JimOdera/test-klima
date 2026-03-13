@@ -1,6 +1,5 @@
-// RiskToleranceButtons.tsx
-
 import React from "react";
+import { Check } from "lucide-react";
 
 interface RiskToleranceButtonsProps {
     label: string;
@@ -23,14 +22,25 @@ const RiskToleranceButtons: React.FC<RiskToleranceButtonsProps> = ({
         if (value === level) {
             switch (level) {
                 case "low":
-                    return "bg-green-100 border-green-500 text-green-800";
+                    return "bg-[#E3FCEF] border-[#0D453B] text-[#0D453B]";
                 case "medium":
                     return "bg-yellow-100 border-yellow-500 text-yellow-700";
                 case "high":
                     return "bg-red-100 border-red-500 text-red-800";
             }
         }
-        return "border-gray-300 hover:bg-gray-50 text-gray-600";
+        return "border-gray-300 hover:bg-gray-50 text-gray-600 bg-white";
+    };
+
+    const getIconStyles = (level: "low" | "medium" | "high") => {
+        switch (level) {
+            case "low":
+                return "bg-[#0FE880] text-[#0D453B]";
+            case "medium":
+                return "bg-yellow-400 text-yellow-900";
+            case "high":
+                return "bg-red-600 text-white";
+        }
     };
 
     return (
@@ -45,11 +55,14 @@ const RiskToleranceButtons: React.FC<RiskToleranceButtonsProps> = ({
                         key={level}
                         type="button"
                         onClick={() => onChange(value === level ? null : level)}
-                        className={`px-4 py-2 rounded-lg border text-xs font-medium capitalize transition bg-white ${getButtonStyles(
-                            level
-                        )}`}
+                        className={`relative w-28 h-12 flex items-center justify-center rounded-lg border text-xs font-semibold capitalize transition ${getButtonStyles(level)}`}
                     >
                         {level}
+                        {value === level && (
+                            <span className={`absolute right-2 rounded-full w-4 h-4 flex items-center justify-center ${getIconStyles(level)}`}>
+                                <Check size={12} />
+                            </span>
+                        )}
                     </button>
                 ))}
             </div>

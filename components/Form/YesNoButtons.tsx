@@ -1,6 +1,5 @@
-// YesNoButtons.tsx
-
 import React from "react";
+import { Check, X } from "lucide-react";
 
 interface YesNoButtonsProps {
     label: string;
@@ -27,22 +26,32 @@ const YesNoButtons: React.FC<YesNoButtonsProps> = ({
                 <button
                     type="button"
                     onClick={() => onChange(value === true ? null : true)}
-                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition bg-white ${value === true
-                        ? "bg-green-100 border-green-500 text-green-800"
-                        : "border-gray-300 hover:bg-gray-50 text-gray-600"
+                    className={`flex items-center gap-1.5 w-28 h-12 flex items-center justify-center relative rounded-lg border text-xs font-semibold transition ${value === true
+                        ? "bg-[#E3FCEF] border-[#0D453B] text-[#0D453B]"
+                        : "border-gray-300 hover:bg-gray-50 text-gray-600 bg-white"
                         }`}
                 >
                     Yes
+                    {value === true && (
+                        <span className="bg-[#0FE880] text-[#0D453B] absolute right-2 rounded-full w-4 h-4 flex items-center justify-center">
+                            <Check size={12} />
+                        </span>
+                    )}
                 </button>
                 <button
                     type="button"
                     onClick={() => onChange(value === false ? null : false)}
-                    className={`px-4 py-2 rounded-lg border text-xs font-medium transition bg-white ${value === false
+                    className={`flex items-center gap-1.5 w-28 h-12 flex items-center justify-center relative rounded-lg border text-xs font-semibold transition ${value === false
                         ? "bg-red-100 border-red-500 text-red-800"
-                        : "border-gray-300 hover:bg-gray-50 text-gray-600"
+                        : "border-gray-300 hover:bg-gray-50 text-gray-600 bg-white"
                         }`}
                 >
                     No
+                    {value === false && (
+                        <span className="bg-red-600 text-red-300 absolute right-2 rounded-full w-4 h-4 flex items-center justify-center">
+                            <X size={12} strokeWidth={4} />
+                        </span>
+                    )}
                 </button>
             </div>
         </div>
