@@ -36,8 +36,8 @@ const STATIC_TABS = [
     { id: 'green-portfolio', label: 'Green Portfolio', badge: null },
     { id: 'my-projects', label: 'My Projects', badge: 12 },
     { id: 'drafts', label: 'Drafts', badge: 8 },
-    { id: 'transactions', label: 'Transactions', badge: null },
-    { id: 'market-place', label: 'Market Place', badge: null },
+    // { id: 'transactions', label: 'Transactions', badge: null },
+    // { id: 'market-place', label: 'Market Place', badge: null },
 ]
 
 const PORTFOLIO_SUB_TABS = [
