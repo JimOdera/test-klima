@@ -3,13 +3,12 @@
 import FloatingHelpButton from '@/components/FloatingHelpButton'
 import Header from '@/components/Header'
 import ProjectsGrid from '@/components/projects/ProjectsGrid'
+import ProjectsList from '@/components/projects/ProjectsList'
 import { search, upField } from '@/public'
 import { ChevronDown, CirclePlus, LayoutGrid, ListFilter, Logs } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-
-// --- Tab content components ---
 
 const TabContainer = ({ children }: { children: React.ReactNode }) => (
     <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-6">
@@ -23,10 +22,10 @@ const GreenPortfolioContent = () => (
     </TabContainer>
 )
 
-const MyProjectsContent = () => (
+const MyProjectsContent = ({ view }: { view: 'grid' | 'list' }) => (
     <TabContainer>
         <div className="w-full h-full min-h-60 -mt-14">
-            <ProjectsGrid />
+            {view === 'grid' ? <ProjectsGrid /> : <ProjectsList />}
         </div>
     </TabContainer>
 )
@@ -49,22 +48,44 @@ const MarketPlaceContent = () => (
     </TabContainer>
 )
 
-// --- Tab config ---
-
-const TABS = [
-    { id: 'green-portfolio', label: 'Green Portfolio', badge: null, content: <GreenPortfolioContent /> },
-    { id: 'my-projects', label: 'My Projects', badge: 12, content: <MyProjectsContent /> },
-    { id: 'drafts', label: 'Drafts', badge: 8, content: <DraftsContent /> },
-    { id: 'transactions', label: 'Transactions', badge: null, content: <TransactionsContent /> },
-    { id: 'market-place', label: 'Market Place', badge: null, content: <MarketPlaceContent /> },
+const STATIC_TABS = [
+    { id: 'green-portfolio', label: 'Green Portfolio', badge: null },
+    { id: 'my-projects', label: 'My Projects', badge: 12 },
+    { id: 'drafts', label: 'Drafts', badge: 8 },
+    { id: 'transactions', label: 'Transactions', badge: null },
+    { id: 'market-place', label: 'Market Place', badge: null },
 ]
 
 // --- Page ---
 
 const page = () => {
-    const [activeTab, setActiveTab] = useState('my-projects')
+    const [activeTab, setActiveTab] = useState(() =>
+        typeof window !== 'undefined' ? (localStorage.getItem('projects:activeTab') ?? 'my-projects') : 'my-projects'
+    )
+    const [view, setView] = useState<'grid' | 'list'>(() =>
+        typeof window !== 'undefined' ? (localStorage.getItem('projects:view') as 'grid' | 'list' ?? 'grid') : 'grid'
+    )
 
-    const activeContent = TABS.find(tab => tab.id === activeTab)?.content
+    const handleTabChange = (id: string) => {
+        setActiveTab(id)
+        localStorage.setItem('projects:activeTab', id)
+    }
+
+    const handleViewChange = (v: 'grid' | 'list') => {
+        setView(v)
+        localStorage.setItem('projects:view', v)
+    }
+
+    const renderContent = () => {
+        switch (activeTab) {
+            case 'green-portfolio': return <GreenPortfolioContent />
+            case 'my-projects': return <MyProjectsContent view={view} />
+            case 'drafts': return <DraftsContent />
+            case 'transactions': return <TransactionsContent />
+            case 'market-place': return <MarketPlaceContent />
+            default: return null
+        }
+    }
 
     return (
         <>
@@ -73,22 +94,20 @@ const page = () => {
             <header className="w-full h-58 bg-[#0b2e34] text-white">
                 <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
                     <div className='flex flex-col py-6 gap-2'>
-                        {/* title */}
                         <div className="flex items-center gap-2">
                             <Image src={upField} alt='upfield' />
                             <h1 className='text-4xl font-semibold'>Upfield</h1>
                         </div>
 
                         <div className="flex flex-col gap-2 py-2">
-                            {/* Tabs row */}
                             <div className="flex items-center justify-between gap-2 border-b border-white/40 text-xs">
                                 <div className="flex items-center gap-4">
-                                    {TABS.map(tab => {
+                                    {STATIC_TABS.map(tab => {
                                         const isActive = activeTab === tab.id
                                         return (
                                             <button
                                                 key={tab.id}
-                                                onClick={() => setActiveTab(tab.id)}
+                                                onClick={() => handleTabChange(tab.id)}
                                                 className={`py-4 border-b-2 flex items-center gap-1 font-semibold transition-colors
                                                     ${isActive
                                                         ? 'border-white text-white'
@@ -130,7 +149,6 @@ const page = () => {
                                 </div>
                             </div>
 
-                            {/* Filters row */}
                             <div className='flex items-center justify-between gap-2'>
                                 <div className="flex items-center gap-2">
                                     <button className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer`}>
@@ -157,10 +175,16 @@ const page = () => {
                                 </div>
 
                                 <div className="flex items-center gap-1 rounded-full border-2 border-[#044D5E] px-1.5 py-1">
-                                    <button className={`p-1.5 rounded-full cursor-pointer transition-colors bg-white text-black`}>
+                                    <button
+                                        onClick={() => handleViewChange('grid')}
+                                        className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'grid' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
+                                    >
                                         <LayoutGrid size={16} strokeWidth={2} />
                                     </button>
-                                    <button className={`p-1.5 rounded-full cursor-pointer transition-colors`}>
+                                    <button
+                                        onClick={() => handleViewChange('list')}
+                                        className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'list' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
+                                    >
                                         <Logs size={16} strokeWidth={2} />
                                     </button>
                                 </div>
@@ -171,7 +195,7 @@ const page = () => {
             </header>
 
             <section className="w-full bg-[#f7f6f0] h-full md:min-h-[70vh]">
-                {activeContent}
+                {renderContent()}
             </section>
 
             <FloatingHelpButton />
