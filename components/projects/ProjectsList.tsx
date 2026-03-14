@@ -250,7 +250,8 @@ const ProjectsList = () => {
                     <button className="w-6 h-6 rounded hover:bg-gray-100 flex items-center justify-center transition-colors">20</button>
                     <button className="px-2 py-1 rounded text-gray-600 hover:text-gray-800 transition-colors font-medium">NEXT ›</button>
                 </div>
-            </div></>
+            </div>
+        </>
     )
 }
 

@@ -4,11 +4,15 @@ import FloatingHelpButton from '@/components/FloatingHelpButton'
 import Header from '@/components/Header'
 import ProjectsGrid from '@/components/projects/ProjectsGrid'
 import ProjectsList from '@/components/projects/ProjectsList'
+import DraftsGrid from '@/components/projects/DraftsGrid'
+import DraftsList from '@/components/projects/DraftsList'
 import { search, upField } from '@/public'
 import { ChevronDown, CirclePlus, LayoutGrid, ListFilter, Logs } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
+
+// --- Tab content components ---
 
 const TabContainer = ({ children }: { children: React.ReactNode }) => (
     <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-6">
@@ -30,9 +34,11 @@ const MyProjectsContent = ({ view }: { view: 'grid' | 'list' }) => (
     </TabContainer>
 )
 
-const DraftsContent = () => (
+const DraftsContent = ({ view }: { view: 'grid' | 'list' }) => (
     <TabContainer>
-        <div className="w-full h-full min-h-60 bg-white -mt-14"></div>
+        <div className="w-full h-full min-h-60 -mt-14">
+            {view === 'grid' ? <DraftsGrid /> : <DraftsList />}
+        </div>
     </TabContainer>
 )
 
@@ -62,25 +68,35 @@ const page = () => {
     const [activeTab, setActiveTab] = useState(() =>
         typeof window !== 'undefined' ? (localStorage.getItem('projects:activeTab') ?? 'my-projects') : 'my-projects'
     )
-    const [view, setView] = useState<'grid' | 'list'>(() =>
-        typeof window !== 'undefined' ? (localStorage.getItem('projects:view') as 'grid' | 'list' ?? 'grid') : 'grid'
-    )
+    const [view, setView] = useState<'grid' | 'list'>(() => {
+        if (typeof window === 'undefined') return 'grid'
+        const tab = localStorage.getItem('projects:activeTab') ?? 'my-projects'
+        const saved = localStorage.getItem(`projects:view:${tab}`) as 'grid' | 'list' | null
+        return saved ?? (tab === 'drafts' ? 'list' : 'grid')
+    })
 
     const handleTabChange = (id: string) => {
         setActiveTab(id)
         localStorage.setItem('projects:activeTab', id)
+        // each tab remembers its own view; drafts defaults to list, others to grid
+        const tabViewKey = `projects:view:${id}`
+        const saved = localStorage.getItem(tabViewKey) as 'grid' | 'list' | null
+        const defaultView: 'grid' | 'list' = id === 'drafts' ? 'list' : 'grid'
+        setView(saved ?? defaultView)
     }
 
     const handleViewChange = (v: 'grid' | 'list') => {
         setView(v)
-        localStorage.setItem('projects:view', v)
+        localStorage.setItem(`projects:view:${activeTab}`, v)
     }
+
+
 
     const renderContent = () => {
         switch (activeTab) {
             case 'green-portfolio': return <GreenPortfolioContent />
             case 'my-projects': return <MyProjectsContent view={view} />
-            case 'drafts': return <DraftsContent />
+            case 'drafts': return <DraftsContent view={view} />
             case 'transactions': return <TransactionsContent />
             case 'market-place': return <MarketPlaceContent />
             default: return null
@@ -94,12 +110,14 @@ const page = () => {
             <header className="w-full h-58 bg-[#0b2e34] text-white">
                 <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
                     <div className='flex flex-col py-6 gap-2'>
+                        {/* title */}
                         <div className="flex items-center gap-2">
                             <Image src={upField} alt='upfield' />
                             <h1 className='text-4xl font-semibold'>Upfield</h1>
                         </div>
 
                         <div className="flex flex-col gap-2 py-2">
+                            {/* Tabs row */}
                             <div className="flex items-center justify-between gap-2 border-b border-white/40 text-xs">
                                 <div className="flex items-center gap-4">
                                     {STATIC_TABS.map(tab => {
@@ -149,6 +167,7 @@ const page = () => {
                                 </div>
                             </div>
 
+                            {/* Filters row */}
                             <div className='flex items-center justify-between gap-2'>
                                 <div className="flex items-center gap-2">
                                     <button className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer`}>
