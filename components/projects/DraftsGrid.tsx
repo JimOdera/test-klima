@@ -1,50 +1,19 @@
-import { badgecheckfilled, dummy1, dummy2, dummy3 } from '@/public'
-import { EllipsisVertical, HeartHandshake, Info, Leaf, MapPin, Trash2 } from 'lucide-react'
-import Image, { StaticImageData } from 'next/image'
+import { badgecheckfilled } from '@/public'
+import { HeartHandshake, Info, Leaf, MapPin, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { Draft } from './projectsData'
 
-type Draft = {
-    id: number
-    image: StaticImageData
-    title: string
-    location: string
-    status: string
-    coBenefits: number
-    categories: string[]
-}
+const DraftsGrid = ({ drafts }: { drafts: Draft[] }) => {
+    if (drafts.length === 0) {
+        return (
+            <div className="w-full bg-white rounded-xl flex items-center justify-center py-20 text-gray-400 text-sm">
+                No drafts match the selected filters.
+            </div>
+        )
+    }
 
-const drafts: Draft[] = [
-    {
-        id: 1,
-        image: dummy1,
-        title: 'Green Horizon Project',
-        location: 'Kiambu, East Africa',
-        status: 'BB',
-        coBenefits: 12,
-        categories: ['Avoidance', 'Engineered', 'Forestry', 'Solar'],
-    },
-    {
-        id: 2,
-        image: dummy2,
-        title: 'Forest Conservation REDD++ Project',
-        location: 'Kampala, East Africa',
-        status: 'BB',
-        coBenefits: 12,
-        categories: ['Avoidance', 'Engineered'],
-    },
-    {
-        id: 3,
-        image: dummy3,
-        title: 'Success Clean Cookstoves',
-        location: 'Mtwapa, East Africa',
-        status: 'BB',
-        coBenefits: 12,
-        categories: ['Avoidance', 'Engineered', 'Solar'],
-    },
-]
-
-const DraftsGrid = () => {
     return (
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
             {drafts.map((draft) => (
@@ -64,11 +33,8 @@ const DraftsGrid = () => {
                                 </span>
                             </div>
                         </div>
-
                         <h1 className='text-lg font-semibold line-clamp-2 min-h-[3.5rem]'>{draft.title}</h1>
-
                         <hr className="h-px bg-gray-200 my-4 border-none" />
-
                         <div className="flex flex-col gap-2">
                             <div className='flex items-center gap-2 text-sm'>
                                 <MapPin size={16} />
@@ -76,7 +42,7 @@ const DraftsGrid = () => {
                             </div>
                             <div className='flex items-center gap-2 text-sm'>
                                 <Leaf size={16} />
-                                <p className='text-gray-500'>Status: <span className='text-gray-700 font-semibold'>{draft.status}</span></p>
+                                <p className='text-gray-500'>Rating: <span className='text-gray-700 font-semibold'>{draft.carbonRating}</span></p>
                             </div>
                             <div className='flex items-center gap-2 text-sm'>
                                 <HeartHandshake size={16} />
@@ -84,9 +50,7 @@ const DraftsGrid = () => {
                                 <Info size={16} />
                             </div>
                         </div>
-
                         <hr className="h-px bg-gray-200 my-4 border-none" />
-
                         <div className='flex items-center flex-wrap gap-2 text-xs text-gray-700'>
                             <button className='mr-1'>Categories</button>
                             {draft.categories.slice(0, 2).map((cat) => (
@@ -97,13 +61,8 @@ const DraftsGrid = () => {
                             )}
                         </div>
                     </div>
-
-                    {/* Actions footer */}
                     <div className="flex items-center justify-between gap-2 px-2 py-2 border-t border-gray-100 mt-auto">
-                        <Link
-                            href="/projects/form"
-                            className="flex-1 text-center border border-gray-300 text-gray-700 text-xs font-semibold px-4 py-1.5 rounded-full hover:bg-gray-50 transition-colors"
-                        >
+                        <Link href="/projects/form" className="flex-1 text-center border border-gray-300 text-gray-700 text-xs font-semibold px-4 py-1.5 rounded-full hover:bg-gray-50 transition-colors">
                             Continue
                         </Link>
                         <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-200 transition-colors shrink-0">
