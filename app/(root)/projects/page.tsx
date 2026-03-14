@@ -204,7 +204,7 @@ const page = () => {
                                     {/* Toggle button */}
                                     <button
                                         onClick={() => { setFiltersOpen(o => !o); setActiveFilter(null) }}
-                                        className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer ${filtersOpen ? 'bg-[#044D5E] text-white' : 'text-white'}`}
+                                        className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer ${filtersOpen ? 'text-white' : 'bg-[#044D5E] text-white'}`}
                                     >
                                         <ListFilter size={14} />
                                     </button>
