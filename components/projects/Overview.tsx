@@ -1,10 +1,13 @@
 import React from 'react'
-import LocationPicker from '../Maps/LocationPicker'
+// import LocationPicker from '../Maps/LocationPicker'
 import Link from 'next/link'
 import { fileText, rss } from '@/public'
 import { Banknote, ChevronRight, Flower, Leaf, TrendingUp } from 'lucide-react'
 import Image from 'next/image'
-import EmissionInsights from './EmissionInsights'
+// import EmissionInsights from './EmissionInsights'
+import dynamic from 'next/dynamic'
+const EmissionInsights = dynamic(() => import('./EmissionInsights'), { ssr: false });
+const LocationPicker = dynamic(() => import('../Maps/LocationPicker'), { ssr: false });
 
 const Overview = () => {
     return (
