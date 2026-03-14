@@ -55,15 +55,17 @@ const FILTERS_CONFIG = [
 ]
 
 const page = () => {
-    const [activeTab, setActiveTab] = useState(() =>
-        typeof window !== 'undefined' ? (localStorage.getItem('projects:activeTab') ?? 'my-projects') : 'my-projects'
-    )
-    const [view, setView] = useState<'grid' | 'list'>(() => {
-        if (typeof window === 'undefined') return 'grid'
+    const [activeTab, setActiveTab] = useState('my-projects')
+    const [view, setView] = useState<'grid' | 'list'>('grid')
+
+    // Hydrate from localStorage after mount (avoids SSR window errors)
+    useEffect(() => {
         const tab = localStorage.getItem('projects:activeTab') ?? 'my-projects'
         const saved = localStorage.getItem(`projects:view:${tab}`) as 'grid' | 'list' | null
-        return saved ?? (tab === 'drafts' ? 'list' : 'grid')
-    })
+        const defaultView: 'grid' | 'list' = tab === 'drafts' ? 'list' : 'grid'
+        setActiveTab(tab)
+        setView(saved ?? defaultView)
+    }, [])
     const [portfolioSubTab, setPortfolioSubTab] = useState('overview')
     const [filtersOpen, setFiltersOpen] = useState(true)
     const [activeFilter, setActiveFilter] = useState<string | null>(null)
@@ -233,7 +235,7 @@ const page = () => {
                                                     onClick={() => setPortfolioSubTab(sub.id)}
                                                     className={`px-4 py-1.5 rounded-full text-xs font-semibold border-2 transition-colors cursor-pointer
                                                         ${isActive
-                                                            ? 'bg-[#4ABEA6] border-[#4ABEA6] text-white'
+                                                            ? 'bg-[#044D5E] border-[#044D5E] text-white'
                                                             : 'border-[#044D5E] text-[#82AFB9] hover:text-white/70'
                                                         }`}
                                                 >
