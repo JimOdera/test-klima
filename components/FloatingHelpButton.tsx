@@ -388,10 +388,10 @@ export default function FloatingHelpButton() {
                     {/* Help Button */}
                     <button
                         onClick={() => setIsDialogOpen(true)}
-                        className="bg-[#0B2E34] text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 cursor-pointer"
+                        className="bg-[#0B2E34] text-white p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 cursor-pointer"
                         aria-label="Open help dialog"
                     >
-                        <Image src={messagecirclemore} alt='messagecirclemore' />
+                        <Image src={messagecirclemore} alt='messagecirclemore' className='w-4 h-4' />
                     </button>
                 </div>
             </div>

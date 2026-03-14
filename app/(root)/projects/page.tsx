@@ -6,6 +6,7 @@ import ProjectsGrid from '@/components/projects/ProjectsGrid'
 import ProjectsList from '@/components/projects/ProjectsList'
 import DraftsGrid from '@/components/projects/DraftsGrid'
 import DraftsList from '@/components/projects/DraftsList'
+import Overview from '@/components/projects/Overview'
 import { ALL_PROJECTS, ALL_DRAFTS, applyFilters, applyDraftFilters, FilterValues } from '@/components/projects/projectsData'
 import { search, upField } from '@/public'
 import { ChevronDown, CirclePlus, LayoutGrid, ListFilter, Logs } from 'lucide-react'
@@ -17,12 +18,6 @@ const TabContainer = ({ children }: { children: React.ReactNode }) => (
     <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 py-6">
         {children}
     </div>
-)
-
-const GreenPortfolioContent = () => (
-    <TabContainer>
-        <div className="w-full h-full min-h-60 bg-white -mt-14"></div>
-    </TabContainer>
 )
 
 const TransactionsContent = () => (
@@ -45,6 +40,13 @@ const STATIC_TABS = [
     { id: 'market-place', label: 'Market Place', badge: null },
 ]
 
+const PORTFOLIO_SUB_TABS = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'revenue-potential', label: 'Revenue potential' },
+    { id: 'emission-insights', label: 'Emission insights' },
+    { id: 'live-projects', label: 'Live projects' },
+]
+
 const FILTERS_CONFIG = [
     { label: 'Ratings', options: ['All', 'A', 'AA', 'AAA', 'B', 'BB', 'BBB'] },
     { label: 'Category', options: ['Any', 'Avoidance', 'Engineered', 'Forestry', 'Solar', 'Waste Management'] },
@@ -62,6 +64,7 @@ const page = () => {
         const saved = localStorage.getItem(`projects:view:${tab}`) as 'grid' | 'list' | null
         return saved ?? (tab === 'drafts' ? 'list' : 'grid')
     })
+    const [portfolioSubTab, setPortfolioSubTab] = useState('overview')
     const [filtersOpen, setFiltersOpen] = useState(true)
     const [activeFilter, setActiveFilter] = useState<string | null>(null)
     const [filterValues, setFilterValues] = useState<FilterValues>({
@@ -111,9 +114,28 @@ const page = () => {
         localStorage.setItem(`projects:view:${activeTab}`, v)
     }
 
+    const isGreenPortfolio = activeTab === 'green-portfolio'
+
+    const renderPortfolioContent = () => {
+        switch (portfolioSubTab) {
+            case 'overview': return <Overview />
+            case 'revenue-potential': return <div className="w-full min-h-60 bg-white rounded-xl p-6 text-gray-400 text-sm">Revenue potential content goes here.</div>
+            case 'emission-insights': return <div className="w-full min-h-60 bg-white rounded-xl p-6 text-gray-400 text-sm">Emission insights content goes here.</div>
+            case 'live-projects': return <div className="w-full min-h-60 bg-white rounded-xl p-6 text-gray-400 text-sm">Live projects content goes here.</div>
+            default: return null
+        }
+    }
+
     const renderContent = () => {
         switch (activeTab) {
-            case 'green-portfolio': return <GreenPortfolioContent />
+            case 'green-portfolio':
+                return (
+                    <TabContainer>
+                        <div className="w-full h-full min-h-60 -mt-14">
+                            {renderPortfolioContent()}
+                        </div>
+                    </TabContainer>
+                )
             case 'my-projects':
                 return (
                     <TabContainer>
@@ -183,7 +205,7 @@ const page = () => {
                                 </div>
 
                                 <div className="flex flex-col md:flex-row items-center gap-4 pb-2">
-                                    <div className={`w-full sm:w-80 flex border-2 border-[#044D5E] rounded-full items-center transition-colors duration-200`}>
+                                    <div className="w-full sm:w-80 flex border-2 border-[#044D5E] rounded-full items-center transition-colors duration-200">
                                         <Image src={search} alt="search" width={20} height={20} className="ml-2 shrink-0" />
                                         <input
                                             type="search"
@@ -198,80 +220,105 @@ const page = () => {
                                 </div>
                             </div>
 
-                            {/* Filters row */}
+                            {/* Second row — sub-nav for green portfolio, filters for everything else */}
                             <div className='flex items-center justify-between gap-2'>
-                                <div className="flex items-center gap-2" ref={filterRef}>
-                                    {/* Toggle button */}
-                                    <button
-                                        onClick={() => { setFiltersOpen(o => !o); setActiveFilter(null) }}
-                                        className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer ${filtersOpen ? 'text-white' : 'bg-[#044D5E] text-white'}`}
-                                    >
-                                        <ListFilter size={14} />
-                                    </button>
-
-                                    {filtersOpen && FILTERS_CONFIG.map(filter => {
-                                        const isOpen = activeFilter === filter.label
-                                        const value = filterValues[filter.label as keyof FilterValues]
-                                        return (
-                                            <div key={filter.label} className="relative">
+                                {isGreenPortfolio ? (
+                                    /* Portfolio sub-tabs */
+                                    <div className="flex items-center gap-2">
+                                        {PORTFOLIO_SUB_TABS.map(sub => {
+                                            const isActive = portfolioSubTab === sub.id
+                                            return (
                                                 <button
-                                                    onClick={() => setActiveFilter(isOpen ? null : filter.label)}
-                                                    className="border-2 border-[#044D5E] text-[#82AFB9] flex items-center justify-between gap-2 w-38 px-4 py-1.5 rounded-full text-xs transition-colors relative cursor-pointer"
+                                                    key={sub.id}
+                                                    onClick={() => setPortfolioSubTab(sub.id)}
+                                                    className={`px-4 py-1.5 rounded-full text-xs font-semibold border-2 transition-colors cursor-pointer
+                                                        ${isActive
+                                                            ? 'bg-[#4ABEA6] border-[#4ABEA6] text-white'
+                                                            : 'border-[#044D5E] text-[#82AFB9] hover:text-white/70'
+                                                        }`}
                                                 >
-                                                    <span className="truncate">
-                                                        {filter.label}: <span className='font-bold text-white'>{value}</span>
-                                                    </span>
-                                                    <ChevronDown
-                                                        size={32}
-                                                        className={`absolute -bottom-2.5 -right-2 transition-transform duration-200 text-[#044D5E] ${isOpen ? 'rotate-180' : ''}`}
-                                                    />
+                                                    {sub.label}
                                                 </button>
-
-                                                {isOpen && (
-                                                    <div className="absolute top-full left-0 mt-3 bg-[#0b2e34] border border-[#044D5E] rounded-xl shadow-lg z-50 py-1 min-w-[160px]">
-                                                        {filter.options.map(opt => (
-                                                            <button
-                                                                key={opt}
-                                                                onClick={() => {
-                                                                    setFilterValues(prev => ({ ...prev, [filter.label]: opt }))
-                                                                    setActiveFilter(null)
-                                                                }}
-                                                                className={`w-full text-left px-4 py-2 text-xs hover:bg-[#044D5E] transition-colors
-                                                                    ${value === opt ? 'text-white font-bold bg-[#044D5E]' : 'text-White'}`}
-                                                            >
-                                                                {opt}
-                                                            </button>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
-
-                                    {filtersApplied && (
+                                            )
+                                        })}
+                                    </div>
+                                ) : (
+                                    /* Filters row */
+                                    <div className="flex items-center gap-2" ref={filterRef}>
                                         <button
-                                            onClick={clearFilters}
-                                            className="border-2 px-4 py-2 border-[#044D5E] hover:bg-white/5 rounded-full transition-colors cursor-pointer text-xs"
+                                            onClick={() => { setFiltersOpen(o => !o); setActiveFilter(null) }}
+                                            className={`border-2 border-[#044D5E] p-2.5 rounded-full transition-colors cursor-pointer ${filtersOpen ? 'text-white' : 'bg-[#044D5E] text-white'}`}
                                         >
-                                            Clear filters
+                                            <ListFilter size={14} />
                                         </button>
-                                    )}
-                                </div>
 
-                                <div className="flex items-center gap-1 rounded-full border-2 border-[#044D5E] px-1.5 py-1">
-                                    <button
-                                        onClick={() => handleViewChange('grid')}
-                                        className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'grid' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
-                                    >
-                                        <LayoutGrid size={16} strokeWidth={2} />
-                                    </button>
-                                    <button
-                                        onClick={() => handleViewChange('list')}
-                                        className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'list' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
-                                    >
-                                        <Logs size={16} strokeWidth={2} />
-                                    </button>
-                                </div>
+                                        {filtersOpen && FILTERS_CONFIG.map(filter => {
+                                            const isOpen = activeFilter === filter.label
+                                            const value = filterValues[filter.label as keyof FilterValues]
+                                            return (
+                                                <div key={filter.label} className="relative">
+                                                    <button
+                                                        onClick={() => setActiveFilter(isOpen ? null : filter.label)}
+                                                        className="border-2 border-[#044D5E] text-[#82AFB9] flex items-center justify-between gap-2 w-38 px-4 py-1.5 rounded-full text-xs transition-colors relative cursor-pointer"
+                                                    >
+                                                        <span className="truncate">
+                                                            {filter.label}: <span className='font-bold text-white'>{value}</span>
+                                                        </span>
+                                                        <ChevronDown
+                                                            size={32}
+                                                            className={`absolute -bottom-2.5 -right-2 transition-transform duration-200 text-[#044D5E] ${isOpen ? 'rotate-180' : ''}`}
+                                                        />
+                                                    </button>
+
+                                                    {isOpen && (
+                                                        <div className="absolute top-full left-0 mt-3 bg-[#0b2e34] border border-[#044D5E] rounded-xl shadow-lg z-50 py-1 min-w-[160px]">
+                                                            {filter.options.map(opt => (
+                                                                <button
+                                                                    key={opt}
+                                                                    onClick={() => {
+                                                                        setFilterValues(prev => ({ ...prev, [filter.label]: opt }))
+                                                                        setActiveFilter(null)
+                                                                    }}
+                                                                    className={`w-full text-left px-4 py-2 text-xs hover:bg-[#044D5E] transition-colors
+                                                                        ${value === opt ? 'text-white font-bold bg-[#044D5E]' : 'text-white/70'}`}
+                                                                >
+                                                                    {opt}
+                                                                </button>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+
+                                        {filtersApplied && (
+                                            <button
+                                                onClick={clearFilters}
+                                                className="border-2 px-4 py-2 border-[#044D5E] hover:bg-white/5 rounded-full transition-colors cursor-pointer text-xs"
+                                            >
+                                                Clear filters
+                                            </button>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Grid/List toggle — hidden on green portfolio */}
+                                {!isGreenPortfolio && (
+                                    <div className="flex items-center gap-1 rounded-full border-2 border-[#044D5E] px-1.5 py-1">
+                                        <button
+                                            onClick={() => handleViewChange('grid')}
+                                            className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'grid' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
+                                        >
+                                            <LayoutGrid size={16} strokeWidth={2} />
+                                        </button>
+                                        <button
+                                            onClick={() => handleViewChange('list')}
+                                            className={`p-1.5 rounded-full cursor-pointer transition-colors ${view === 'list' ? 'bg-white text-black' : 'text-[#82AFB9]'}`}
+                                        >
+                                            <Logs size={16} strokeWidth={2} />
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
