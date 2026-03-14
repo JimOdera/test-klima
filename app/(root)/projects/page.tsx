@@ -58,7 +58,6 @@ const page = () => {
     const [activeTab, setActiveTab] = useState('my-projects')
     const [view, setView] = useState<'grid' | 'list'>('grid')
 
-    // Hydrate from localStorage after mount (avoids SSR window errors)
     useEffect(() => {
         const tab = localStorage.getItem('projects:activeTab') ?? 'my-projects'
         const saved = localStorage.getItem(`projects:view:${tab}`) as 'grid' | 'list' | null
@@ -173,14 +172,14 @@ const page = () => {
             <header className="w-full h-58 bg-[#0b2e34] text-white">
                 <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-8">
                     <div className='flex flex-col py-6 gap-2'>
-                        {/* title */}
+
                         <div className="flex items-center gap-2">
                             <Image src={upField} alt='upfield' />
                             <h1 className='text-4xl font-semibold'>Upfield</h1>
                         </div>
 
                         <div className="flex flex-col gap-2 py-2">
-                            {/* Tabs row */}
+
                             <div className="flex items-center justify-between gap-2 border-b border-white/40 text-xs">
                                 <div className="flex items-center gap-4">
                                     {STATIC_TABS.map(tab => {
@@ -222,10 +221,9 @@ const page = () => {
                                 </div>
                             </div>
 
-                            {/* Second row — sub-nav for green portfolio, filters for everything else */}
                             <div className='flex items-center justify-between gap-2'>
                                 {isGreenPortfolio ? (
-                                    /* Portfolio sub-tabs */
+
                                     <div className="flex items-center gap-2">
                                         {PORTFOLIO_SUB_TABS.map(sub => {
                                             const isActive = portfolioSubTab === sub.id
@@ -245,7 +243,7 @@ const page = () => {
                                         })}
                                     </div>
                                 ) : (
-                                    /* Filters row */
+
                                     <div className="flex items-center gap-2" ref={filterRef}>
                                         <button
                                             onClick={() => { setFiltersOpen(o => !o); setActiveFilter(null) }}
@@ -304,7 +302,7 @@ const page = () => {
                                     </div>
                                 )}
 
-                                {/* Grid/List toggle — hidden on green portfolio */}
+
                                 {!isGreenPortfolio && (
                                     <div className="flex items-center gap-1 rounded-full border-2 border-[#044D5E] px-1.5 py-1">
                                         <button
