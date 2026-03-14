@@ -114,7 +114,7 @@ const ProjectsGrid = () => {
             {projects.map((project) => {
                 const { progressBg, progressBar, progressTextColor } = STATUS_STYLES[project.statusLabel]
                 return (
-                    <div key={project.id} className="bg-white rounded-xl space-y-2 overflow-hidden flex flex-col">
+                    <div key={project.id} className="bg-white rounded-xl space-y-2 overflow-hidden flex flex-col border border-[#DEDEDE]">
                         <div className="p-2 space-y-2 flex-1">
                             <div className="overflow-hidden rounded-lg h-36 relative">
                                 <Image src={project.image} alt='grid image' className="w-full h-full object-cover" />
